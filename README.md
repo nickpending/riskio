@@ -42,7 +42,7 @@ Tags:
 
 ## REQUIREMENTS
 
-You'll need the following gems to use all features of Grackle:
+You'll need the following gems to use all features of riskio:
 * json
 * rest-client
 
