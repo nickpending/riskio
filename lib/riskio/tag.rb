@@ -9,7 +9,9 @@ module Riskio
     end
     
     def delete(id, data)
-      response = RestClient::Request.execute( :method => :delete,
+      # XXX - RestClient does not current support DELETE method with payload
+      response = RestClient::Request.execute( 
+                                              :method => :delete,
                                               :url => @uri + "/#{id}/tags",
                                               :payload => data,
                                               :headers => @header

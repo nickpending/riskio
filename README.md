@@ -4,9 +4,7 @@ by Rudy Ruiz
 * http://twitter.com/rudyruiz
 
 ## DESCRIPTION
-Riskio is a lightweight Ruby wrapper around the Riskio REST API. The goal is a simple
-wrapper that offers a mix between configuration, idiomatic consistency and less abstraction
-between the Riskio REST interface and this wrapper. It does not fully abstract the
+Riskio is a lightweight Ruby wrapper around the Riskio REST API. The goal  It does not fully abstract the
 underlying API, but it does not require you to send endpoints and other details for
 each request. The wrapper user will still need to consult the Riskio REST API
 documentation (http://api.riskio.com) to understand the required parameters and

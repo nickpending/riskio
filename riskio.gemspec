@@ -8,9 +8,11 @@ Gem::Specification.new do |spec|
   spec.version       = Riskio::VERSION
   spec.authors       = ["Rudy Ruiz"]
   spec.email         = ["roodee@thummy.com"]
-  spec.description   = %q{Wrapper for RiskIO API}
-  spec.summary       = %q{}
-  spec.homepage      = ""
+  spec.description   = %q{Riskio is a library for the RiskIO API and is designed is a simple
+  wrapper that offers a mix between configuration, idiomatic consistency and less abstraction
+  between the Riskio REST interface and this wrapper.}
+  spec.summary       = %q{Riskio is a lightweight library for the RiskIO API.}
+  spec.homepage      = "https://github.com/roodee/riskio"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -19,8 +21,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", "~> 10.1"
   
-  spec.add_runtime_dependency "rest_client"
-  spec.add_runtime_dependency "json"
+  spec.add_runtime_dependency "rest_client", "~> 1.7"
+  spec.add_runtime_dependency "json", "~> 1.8"
 end

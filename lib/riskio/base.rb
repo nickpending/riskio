@@ -34,6 +34,7 @@ module Riskio
         else
           response = RestClient.send(method, uri, data, @header)
         end
+      # XXX - Yes, I know, we are naughty
       rescue => e
         raise RiskioError.new(method, uri, e, "Unexpected failure making request.") 
       end
