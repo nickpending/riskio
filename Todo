@@ -1,0 +1,3 @@
+1. Add validation for primary locators in base class
+2. Create command-line utility
+3. Add filter support for inactive assets
