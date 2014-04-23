@@ -1,29 +1,60 @@
-# Riskio
+# riskio
+by Rudy Ruiz
+* roodee [at] thummy [dot] com
+* http://twitter.com/rudyruiz
 
-TODO: Write a gem description
+## DESCRIPTION
+Riskio is a lightweight Ruby wrapper around the Riskio REST API. The goal is a simple
+wrapper that offers a mix between configuration, idiomatic consistency and less abstraction
+between the Riskio REST interface and this wrapper. It does not fully abstract the
+underlying API, but it does not require you to send endpoints and other details for
+each request. The wrapper user will still need to consult the Riskio REST API
+documentation (http://api.riskio.com) to understand the required parameters and
+options. Today this wrapper returns unprocessed JSON data.
 
-## Installation
 
-Add this line to your application's Gemfile:
+### Riskio API 11-06-2013 and Riskio 0.3.0
+Riskio 0.0.1 supports the Riskio API 11-06-2013 .
 
-    gem 'riskio'
+## USING Riskio
 
-And then execute:
+Before you do anything else, you'll need to
+	require 'riskio'
 
-    $ bundle
+Create your client:
 
-Or install it yourself as:
+	@client = Riskio::Client.new({:riskio_auth_token => "yourtokenhere"})
 
-    $ gem install riskio
+Assets:
+	
+	@client.asset.create({:asset => { :primary_locator => "ip_address", :ip_address => "127.0.0.1"} })
+	@client.asset.show("yourassetid")
+	@client.asset.list()
+	@client.asset.list(2)
+	
+Vulnerabilities:
 
-## Usage
+	@client.vulnerability.create({:vulnerability => { :wasc_id => "WASC-01", :primary_locator => "ip_address", :ip_address => "127.0.0.1"} })
+	
+Tags:
 
-TODO: Write usage instructions here
+	@client.tags.update("yourassetid", {:asset => {:tags => "test"} })
 
-## Contributing
+## REQUIREMENTS
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+You'll need the following gems to use all features of Grackle:
+* json
+* rest-client
+
+### Ruby Version Support
+Riskio is tested on 2.0.1
+
+## TODO
+1. Add validation for primary locators in base class
+2. Create command-line utility
+3. Add filter support for inactive assets
+
+## INSTALL
+riskio is available on rubygems.org. Just do the usual:
+
+  gem install riskio
