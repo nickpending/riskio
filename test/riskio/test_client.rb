@@ -102,7 +102,6 @@ class TestClient < MiniTest::Unit::TestCase
   
   def test_connector_list()
     response = @client.connector.list
-    puts response
   end
   
   def test_connector_update()
