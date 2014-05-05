@@ -44,6 +44,15 @@ class TestClient < MiniTest::Unit::TestCase
     assert_equal(data["asset"]["primary_locator"], "ip_address")
   end
   
+  def test_asset_create_invalid_locator()
+    asset = {:asset => { :primary_locator => "ip", :ip_address => "127.0.0.1"} }
+    response = @client.asset.create(asset)
+    data = JSON.parse(response)
+    puts response
+    refute_nil(data["asset"]["id"])
+    assert_equal(data["asset"]["primary_locator"], "ip_address")
+  end
+  
   def test_asset_create_invalid()
     #asset = {:asset => { :primary_locator => "ip_address", :ip_address => "127"} }
     #assert_raises(Riskio::RiskioError) {@client.asset.create(asset)}

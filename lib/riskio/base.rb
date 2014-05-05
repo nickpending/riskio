@@ -1,5 +1,16 @@
 module Riskio
   class Base
+    RISKIO_PRIMARY_LOCATOR              = [
+                                            :ip_address,
+                                            :hostname,
+                                            :database,
+                                            :url,
+                                            :mac_address,
+                                            :netbios,
+                                            :fqdn
+                                          ]
+    
+    
     def initialize(uri, header)
       @uri, @header = uri, header
     end
@@ -13,6 +24,15 @@ module Riskio
     end
 
     def create(data)
+      # Find the primary_locator attribute
+      locator = find_value(data, :primary_locator)
+      
+      # Raise error if it isn't included
+      raise RiskioError.new("create", @uri, nil, "Primary locator is required.") if locator.nil?
+      
+      # Check to see if the locator is a valid label
+      raise RiskioError.new("create", @uri, nil, "Primary locator is invalid.") unless RISKIO_PRIMARY_LOCATOR.include?(locator)
+      
       response = request(:post, @uri, data)
     end
 
@@ -25,6 +45,21 @@ module Riskio
     end
 
     private    
+    def valid_locator?(locator)
+      RISKIO_PRIMARY_LOCATOR.each do |primary_locator|
+        return true if primary_locator == locator
+      end
+      return false
+    end
+
+    def find_value(data, name)
+      data.each_key do |key|
+        # search for the key
+        return data[key.to_sym].to_sym if key.to_sym == name.to_sym
+        return find_value(data[key.to_sym], name) if data[key.to_sym].is_a?(Hash)
+      end
+      return nil
+    end
 
     def request(method, uri, data=nil)
       begin
