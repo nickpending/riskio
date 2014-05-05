@@ -11,11 +11,12 @@ module Riskio
                                 :asset            => "assets",
                                 :vulnerability    => "vulnerabilities",
                                 :tag              => "assets",
-                                :patch            => "patches"
+                                :patch            => "patches",
+                                :connector        => "connectors"
                               }
                               
     RISKIO_DEFAULTS         = [:riskio_uri, :riskio_auth_header, :riskio_auth_token, :riskio_content_type].freeze
-    RISKIO_CLASSES          = [:asset, :vulnerability, :tag, :patch]
+    RISKIO_CLASSES          = [:asset, :vulnerability, :tag, :patch, :connector]
 
     attr_accessor           *RISKIO_DEFAULTS
     attr_accessor           *RISKIO_CLASSES

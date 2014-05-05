@@ -2,9 +2,11 @@ require "helper"
 
 class TestClient < MiniTest::Unit::TestCase
   def setup()
+    raise "Setup your token first."
     @token = "<insert your token here>"
     @asset_id = "<insert your asset id here>"
     @vulnerability_id = "<insert your vulnerability id here>"
+    @connector_id = "<insert your vulnerability id here"
     @client = Riskio::Client.new({:riskio_auth_token => @token})
   end
   
@@ -46,11 +48,7 @@ class TestClient < MiniTest::Unit::TestCase
   
   def test_asset_create_invalid_locator()
     asset = {:asset => { :primary_locator => "ip", :ip_address => "127.0.0.1"} }
-    response = @client.asset.create(asset)
-    data = JSON.parse(response)
-    puts response
-    refute_nil(data["asset"]["id"])
-    assert_equal(data["asset"]["primary_locator"], "ip_address")
+    assert_raises(Riskio::RiskioError) {@client.asset.create(asset)}
   end
   
   def test_asset_create_invalid()
@@ -99,6 +97,17 @@ class TestClient < MiniTest::Unit::TestCase
   def test_tag_delete()
     tag = {:asset => {:tags => "test"} }
     response = @client.tag.delete(@asset_id, tag)
+    assert_equal(response.code, 204)
+  end
+  
+  def test_connector_list()
+    response = @client.connector.list
+    puts response
+  end
+  
+  def test_connector_update()
+    connector = {:connector => {:name => "testing 1 2 3"} }
+    response = @client.connector.update(@connector_id, connector)
     assert_equal(response.code, 204)
   end
   

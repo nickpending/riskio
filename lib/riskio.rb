@@ -5,6 +5,7 @@ require "riskio/asset"
 require "riskio/vulnerability"
 require "riskio/tag"
 require "riskio/patch"
+require "riskio/connector"
 
 require "rubygems"
 require "rest_client"

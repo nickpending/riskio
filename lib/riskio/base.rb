@@ -44,14 +44,9 @@ module Riskio
       raise RiskioError.new("delete", @uri, nil, "Deletion is only implemented in some cases.")
     end
 
-    private    
-    def valid_locator?(locator)
-      RISKIO_PRIMARY_LOCATOR.each do |primary_locator|
-        return true if primary_locator == locator
-      end
-      return false
-    end
-
+    private
+    
+    # Find a key/value pair with :primary_locator label    
     def find_value(data, name)
       data.each_key do |key|
         # search for the key
