@@ -3,10 +3,10 @@ require "helper"
 class TestClient < MiniTest::Unit::TestCase
   def setup()
     raise "Setup your token first."
-    @token = "<insert your token here>"
-    @asset_id = "<insert your asset id here>"
-    @vulnerability_id = "<insert your vulnerability id here>"
-    @connector_id = "<insert your vulnerability id here"
+    @token = "<token>"
+    @asset_id = "<id>"
+    @vulnerability_id = "<id>"
+    @connector_id = "<id>"
     @client = Riskio::Client.new({:riskio_auth_token => @token})
   end
   
@@ -75,6 +75,17 @@ class TestClient < MiniTest::Unit::TestCase
     assert_equal(data["meta"]["page"], 1)
   end
   
+  def test_asset_find_all()
+    assets = @client.asset.find(:all)
+    # Check for hash value
+    # Check for valid record
+  end
+  
+  def test_asset_find_one()
+    asset = @client.asset.find("127.0.0.1")
+    assert_equal(asset["locator"], "127.0.0.1")
+  end
+  
   def test_vulnerability_create()
     vuln = {:vulnerability => { :wasc_id => "WASC-01", :primary_locator => "ip_address", :ip_address => "127.0.0.1"} }
     response = @client.vulnerability.create(vuln)
@@ -102,12 +113,17 @@ class TestClient < MiniTest::Unit::TestCase
   
   def test_connector_list()
     response = @client.connector.list
+    data =  JSON.parse(response)
+    # Is the response a hash
+    assert_kind_of Hash, data
+    # Do we have a valid connector hash
+    assert_equal true, data.key?("connectors")
   end
   
   def test_connector_update()
     connector = {:connector => {:name => "testing 1 2 3"} }
     response = @client.connector.update(@connector_id, connector)
-    assert_equal(response.code, 204)
+    assert_equal(response.code, 200)
   end
   
 end

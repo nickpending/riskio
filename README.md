@@ -30,6 +30,11 @@ Assets:
 	@client.asset.list()
 	@client.asset.list(2)
 	
+	Finding:
+	
+	@client.asset.find(:all)
+	@client.asset.find("127.0.0.1")
+	
 Vulnerabilities:
 
 	@client.vulnerability.create({:vulnerability => { :wasc_id => "WASC-01", :primary_locator => "ip_address", :ip_address => "127.0.0.1"} })
